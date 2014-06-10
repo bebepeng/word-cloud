@@ -6,20 +6,7 @@ You work for a tech conference company.  Somebody transcribes all the noteworthy
 and enters them into a system.  This system outputs a JSON file that looks like this:
 
 ```
-{
-  "Ila Huels": [
-    "OPTIMIZE WEB-ENABLED SUPPLY-CHAINS",
-    "brand sexy channels",
-    "ENVISIONEER ROBUST E-COMMERCE",
-    "TRANSFORM WIRELESS ARCHITECTURES",
-    "BENCHMARK CROSS-PLATFORM PARTNERSHIPS"
-  ],
-  "Cristopher Feest": [
-    "BENCHMARK CROSS-PLATFORM PARTNERSHIPS",
-    "brand sexy channels",
-    "BENCHMARK 24/7 PARADIGMS"
-  ]
-}
+
 ```
 
 Your mission, should you choose to accept it, is to turn this data into a hash that can be used by a word cloud.  The
