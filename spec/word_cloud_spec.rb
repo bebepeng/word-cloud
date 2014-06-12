@@ -1,7 +1,23 @@
 require 'word_cloud'
 
 describe WordCloud do
-  it 'makes a list of buzz words' do
+  it 'makes a list of buzz words for a speaker' do
+    input = {
+      "Bebe Peng" => ["gSchool School Developer", "school Stuff", "gSchool stuff"]
+    }
+
+    output = {
+      "gschool" => {:count => 2, :people => ["Bebe Peng"]},
+      "school" => {:count => 2, :people => ["Bebe Peng"]},
+      "developer" => {:count => 1, :people => ["Bebe Peng"]},
+      "stuff" => {:count => 2, :people => ["Bebe Peng"]},
+    }
+
+    words = WordCloud.new(input)
+    expect(words.buzz_words).to eq output
+  end
+
+  it 'makes a list of buzz words for multiple speakers' do
     input = {
       "Ila Huels" => [
         "OPTIMIZE WEB-ENABLED SUPPLY-CHAINS",

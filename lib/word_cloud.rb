@@ -2,37 +2,26 @@ class WordCloud
   attr_reader :speakers
 
   def initialize(input)
-    @speakers = input.map do |speaker, phrases|
+    @speakers = input.each do |speaker, phrases|
       words = phrases.join(' ').split(' ')
-      {speaker => words}
+      input[speaker] = words.map { |word| word.downcase }
     end
   end
 
   def buzz_words
-    by_speaker = speakers.map do |speaker|
-      speaker.map do |person, word|
-        word.group_by { |i| i.downcase }.map do |unique, counts|
-          {unique => {:count => counts.length, :people => person}}
+    words_said = {}
+    speakers.each do |speaker, words|
+      words.each do |word|
+        if words_said.has_key?(word)
+          words_said[word][:count] += 1
+          if !words_said[word][:people].include?(speaker)
+            words_said[word][:people] << speaker
+          end
+        else
+          words_said[word] = {:count => 1, :people => [speaker]}
         end
       end
-    end.flatten
-
-    by_word = by_speaker.reduce({}) do |h, pairs|
-      pairs.each do |k, v|
-        (h[k] ||= []) << v
-      end; h
     end
-
-    final = {}
-    by_word.each do |key, value|
-      count = 0
-      people = []
-      for i in 0... value.length
-        count += value[i][:count]
-        people << value[i][:people]
-      end
-      final[key] = {:count => count, :people => people}
-    end
-    final
+    words_said
   end
 end
